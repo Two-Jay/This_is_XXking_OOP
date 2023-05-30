@@ -4,23 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@SuppressWarnings("unchecked")
 public class Solution {
     public static void main(String[] args) {
         InputParser inputParser = new InputParser(new SingleIntegerArrayParsingRule());
-        ArrayList<Integer> input = (ArrayList<Integer>) inputParser.parseInput();
+        ArrayList<Integer> input = inputParser.parseInput();
         Printer p = new Printer(new SolutionPrintStrategy());
         p.print(input);
     }
 }
 
 interface InputParsingRuleInterface {
-    public ArrayList<?> parse(BufferedReader br);
+    public ArrayList<Integer> parse(BufferedReader br);
 }
 
 class SingleIntegerArrayParsingRule implements InputParsingRuleInterface {
     @Override
-    public ArrayList<?> parse(BufferedReader br) {
+    public ArrayList<Integer> parse(BufferedReader br) {
         try {
             ArrayList<Integer> arr = new ArrayList<Integer>();
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -42,10 +41,10 @@ class InputParser {
         this.strategy = pr;
     }
 
-    public ArrayList<?> parseInput() {
+    public ArrayList<Integer> parseInput() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            ArrayList<?> result = this.strategy.parse(br);
+            ArrayList<Integer> result = this.strategy.parse(br);
             br.close();
             return result;
         } catch (IOException e){
@@ -55,15 +54,15 @@ class InputParser {
 }
 
 interface PrintStrategyInterface {
-    public String buildPrintableString(ArrayList<?> arr);
+    public String buildPrintableString(ArrayList<Integer> arr);
 }
 
 class SolutionPrintStrategy implements PrintStrategyInterface {
-    public String buildPrintableString(ArrayList<?> arr) {
+    public String buildPrintableString(ArrayList<Integer> arr) {
         StringBuilder sb = new StringBuilder();
 
-        Integer a = (Integer) arr.get(0);
-        Integer b = (Integer) arr.get(1);
+        Integer a = arr.get(0);
+        Integer b = arr.get(1);
         Integer c = a + b;
 
         sb.append(a).append(" + ").append(b).append(" = ").append(c);
@@ -78,7 +77,7 @@ class Printer{
         this.strategy = strategy;
     }
 
-    public void print(ArrayList<?> arr) {
+    public void print(ArrayList<Integer> arr) {
         System.out.println(this.strategy.buildPrintableString(arr));
     }
 }

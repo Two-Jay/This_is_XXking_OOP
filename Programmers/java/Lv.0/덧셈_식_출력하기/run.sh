@@ -1,3 +1,3 @@
 javac Solution.java
-java Solution
+java Solution < input.txt
 rm *.class
